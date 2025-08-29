@@ -1,0 +1,38 @@
+{
+  "name": "@audio-file-hosting-app/backend",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon --exec \"ts-node --project tsconfig.app.json\" src/server.ts",
+    "start": "node dist/server.js",
+    "build": "tsc -p tsconfig.app.json",
+    "build:watch": "tsc -p tsconfig.app.json --watch",
+    "prisma:generate": "npx prisma generate --schema=./prisma/schema.prisma",
+    "prisma:migrate": "npx prisma migrate dev --schema=./prisma/schema.prisma",
+    "prisma:studio": "npx prisma studio --schema=./prisma/schema.prisma",
+    "prisma:reset": "npx prisma migrate reset --schema=./prisma/schema.prisma",
+    "prisma:deploy": "npx prisma migrate deploy --schema=./prisma/schema.prisma",
+    "db:start": "docker-compose up -d",
+    "db:stop": "docker-compose down",
+    "db:clean": "docker-compose down -v",
+    "clean": "rm -rf dist .nxrc",
+    "typecheck": "tsc --noEmit",
+    "dev:full": "npm run db:start && npm run prisma:generate && npm run prisma:migrate && npm run dev"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.15.0",
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.1"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^3.0.0",
+    "@types/cors": "^2.8.19",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/morgan": "^1.9.10",
+    "nodemon": "^3.1.10"
+  }
+}
