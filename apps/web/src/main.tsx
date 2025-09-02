@@ -1,16 +1,48 @@
 import { StrictMode } from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import * as ReactDOM from 'react-dom/client';
-import App from './app/app';
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from 'react-router';
+import { createRoot } from 'react-dom/client';
+import DefaultLayout from './layouts/default';
+import Login from './pages/login/login';
+import ProtectedRoutes from './layouts/protected-routes';
+import Profile from './pages/profile/profile';
+import '@radix-ui/themes/styles.css';
+import Register from './pages/register/register';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Library } from './pages/library';
+import AdminRoutes from './layouts/admin-routes';
+import { ManageUsers } from './pages/manage-users';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+const queryClient = new QueryClient();
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <>
+      <Route path="/" element={<DefaultLayout />}>
+        <Route index element={<Login />} />
+        <Route index path="/register" element={<Register />} />
+
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/library" element={<Library />} />
+        </Route>
+
+        <Route element={<AdminRoutes />}>
+          <Route path="/users" element={<ManageUsers />} />
+        </Route>
+      </Route>
+    </>
+  )
 );
 
-root.render(
+createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </StrictMode>
 );

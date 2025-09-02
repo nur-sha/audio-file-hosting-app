@@ -4,6 +4,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 const app = express();
 import authRoutes from './routes/auth';
+import userRoutes from './routes/user';
 
 app.use(helmet());
 app.use(cors());
@@ -11,6 +12,7 @@ app.use(morgan('combined'));
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
+app.use('/api/user', userRoutes);
 
 app.use('*', (req, res) => {
   res.status(404).json({

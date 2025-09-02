@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "nodemon --exec \"ts-node --project tsconfig.app.json\" src/server.ts",
     "start": "node dist/server.js",
+    "start:full": "npx prisma migrate dev && yarn run start",
     "build": "tsc -p tsconfig.app.json",
     "build:watch": "tsc -p tsconfig.app.json --watch",
     "prisma:generate": "npx prisma generate --schema=./prisma/schema.prisma",

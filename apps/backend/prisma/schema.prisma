@@ -15,6 +15,7 @@ model User {
   role         UserRole @default(USER)
   displayName  String
   fullName     String
+  active       Boolean  @default(true)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 

@@ -6,7 +6,11 @@
     "types": ["node", "express"],
     "rootDir": "src",
     "moduleResolution": "nodenext",
-    "tsBuildInfoFile": "dist/tsconfig.app.tsbuildinfo"
+    "tsBuildInfoFile": "dist/tsconfig.app.tsbuildinfo",
+    "emitDeclarationOnly": false, // Override the base setting
+    "noEmit": false, // Ensure emission is enabled
+    "declaration": true, // Keep generating .d.ts files
+    "declarationMap": true
   },
   "include": ["src/**/*.ts"],
   "exclude": [

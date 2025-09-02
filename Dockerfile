@@ -1,5 +1,5 @@
 FROM node:20-alpine AS base
-WORKDIR /app
+WORKDIR /apps
 
 COPY package*.json yarn.lock ./
 COPY nx.json ./
@@ -18,6 +18,9 @@ COPY . .
 # Frontend image
 # ========================================
 FROM base AS frontend-dev
+
+WORKDIR /apps
+
 EXPOSE 3000
 
 # Start the development server
@@ -27,15 +30,20 @@ CMD ["yarn", "web:dev", "--host", "0.0.0.0"]
 # backend image
 # ========================================
 FROM base AS backend-dev
-RUN yarn install --frozen-lockfile
+#RUN yarn install --frozen-lockfile
+WORKDIR /apps
+
+COPY apps/backend/prisma .apps/backend/prisma/
+
 
 RUN yarn prisma:generate
-RUN yarn prisma:migrate
 
 EXPOSE 3001
 
 # Start the development server
 CMD ["yarn", "backend:dev", "--host", "0.0.0.0"]
+
+
 
 
 

@@ -14,37 +14,6 @@ import { Request, Response } from 'express';
 import { AuthService } from '../services/auth.service';
 
 export class AuthController {
-  static async register(req: Request, res: Response) {
-    try {
-      const { email, password, role, displayName, fullname } = req.body;
-
-      if (!email || !password || !displayName || !fullname) {
-        return res.status(400).json({
-          success: false,
-          message: 'Email and password are required',
-        });
-      }
-
-      const result = await AuthService.register({
-        email,
-        password,
-        role,
-        displayName,
-        fullname,
-      });
-
-      return res.status(200).json({
-        success: true,
-        message: 'User registered successfully',
-        data: result,
-      });
-    } catch (e) {
-      return res.status(500).json({
-        success: false,
-        message: e,
-      });
-    }
-  }
   static async login(req: Request, res: Response) {
     try {
       const { email, password } = req.body;
@@ -64,6 +33,7 @@ export class AuthController {
         data: result,
       });
     } catch (e) {
+      console.log('e::::', e);
       return res.status(500).json({
         success: false,
         message: 'Internal server error',
@@ -72,4 +42,18 @@ export class AuthController {
       });
     }
   }
+
+  // static async getProfile(req: AuthRequest, res: Response) {
+  //   try {
+  //     const user = await AuthService.getUserById(req.user!.id);
+  //     res.json({
+  //       message: 'Profile retrieved successfully',
+  //       data: { user },
+  //     });
+  //   } catch (error: any) {
+  //     res.status(404).json({
+  //       message: error.message || 'User not found',
+  //     });
+  //   }
+  // }
 }
