@@ -13,9 +13,6 @@ const startServer = async () => {
     // Start server
     const server = app.listen(PORT, () => {
       console.log(`✅ Server running on port ${PORT}`);
-      console.log(
-        `✅ Register endpoint: http://localhost:${PORT}/api/auth/register`
-      );
     });
 
     // Handle graceful shutdown

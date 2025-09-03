@@ -13,12 +13,12 @@
     "prisma:studio": "npx prisma studio --schema=./prisma/schema.prisma",
     "prisma:reset": "npx prisma migrate reset --schema=./prisma/schema.prisma",
     "prisma:deploy": "npx prisma migrate deploy --schema=./prisma/schema.prisma",
+    "db:seed": "npx prisma db seed",
     "db:start": "docker-compose up -d",
-    "db:stop": "docker-compose down",
-    "db:clean": "docker-compose down -v",
-    "clean": "rm -rf dist .nxrc",
-    "typecheck": "tsc --noEmit",
-    "dev:full": "npm run db:start && npm run prisma:generate && npm run prisma:migrate && npm run dev"
+    "typecheck": "tsc --noEmit"
+  },
+  "prisma": {
+    "seed": "ts-node --project tsconfig.app.json src/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.15.0",
