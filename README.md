@@ -38,3 +38,8 @@ yarn web:dev
 #### Frontend URL: `http://localhost:3000`
 
 #### Backend endpoint: `http://localhost:3001`
+
+```
+admin@example.com/admin123
+user@example.com/user123
+```

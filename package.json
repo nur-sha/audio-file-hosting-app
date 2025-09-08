@@ -6,7 +6,7 @@
     "web:dev": "nx serve web",
     "web:build": "npx build web",
     "backend:build": "nx build backend",
-    "backend:dev": "cd apps/backend && yarn prisma:migrate && yarn dev",
+    "backend:dev": "cd apps/backend && yarn prisma:migrate && yarn db:seed && yarn dev",
     "prisma:generate": "cd apps/backend && yarn prisma:generate"
   },
   "private": true,
