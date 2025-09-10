@@ -1,0 +1,8 @@
+.flex-hover {
+  background: transparent;
+}
+
+.flex-hover:hover {
+  background: var(--gray-a2);
+  border-radius: var(--radius-5);
+}

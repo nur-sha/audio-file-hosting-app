@@ -4,5 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "vite"
+  },
+  "devDependencies": {
+    "react-use-audio-player": "^4.0.2",
+    "react-dropzone": "^14.3.8"
   }
 }

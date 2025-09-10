@@ -1,17 +1,18 @@
 import { Navigate, Outlet } from 'react-router';
 import useUser from '../hooks/useUser';
-import { Box, Flex } from '@radix-ui/themes';
+import { Box, Container } from '@radix-ui/themes';
+import { Header } from '../components/header';
 
 const AdminRoutes = () => {
-  const { user, isLoggedIn } = useUser();
-
-  if (user?.user.role === 'ADMIN' && isLoggedIn) {
+  const { isLoggedIn, isAdmin } = useUser();
+  if (isAdmin && isLoggedIn) {
     return (
-      <Flex align="center" direction="column">
-        <Box width="100%" maxWidth="1440px">
+      <Box width="100%">
+        <Header />
+        <Container align="center" p="5">
           <Outlet />
-        </Box>
-      </Flex>
+        </Container>
+      </Box>
     );
   }
 

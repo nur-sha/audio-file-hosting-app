@@ -1,11 +1,10 @@
-import { Flex, Link, Theme } from '@radix-ui/themes';
 import { Outlet } from 'react-router';
 
 const DefaultLayout = () => {
   return (
-    <Theme accentColor="plum">
+    <div>
       <Outlet />
-    </Theme>
+    </div>
   );
 };
 

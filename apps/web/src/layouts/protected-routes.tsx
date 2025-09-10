@@ -1,6 +1,7 @@
 import { Navigate, Outlet, useNavigate } from 'react-router';
 import useUser from '../hooks/useUser';
-import { Button, Flex } from '@radix-ui/themes';
+import { Box, Button, Container, Flex } from '@radix-ui/themes';
+import { Header } from '../components/header';
 
 const ProtectedRoutes = () => {
   const { isLoggedIn, user } = useUser();
@@ -8,15 +9,18 @@ const ProtectedRoutes = () => {
 
   if (isLoggedIn) {
     return (
-      <Flex direction="column">
-        {user?.user?.role === 'ADMIN' && (
-          <Flex pb="4">
-            <Button onClick={() => navigate('/users')}>Members</Button>
-          </Flex>
-        )}
+      <Box width="100%">
+        <Header />
+        <Container align="center" p="5">
+          {user?.user?.role === 'ADMIN' && (
+            <Flex pb="4">
+              <Button onClick={() => navigate('/users')}>Members</Button>
+            </Flex>
+          )}
 
-        <Outlet />
-      </Flex>
+          <Outlet />
+        </Container>
+      </Box>
     );
   }
   return <Navigate to="/" />;

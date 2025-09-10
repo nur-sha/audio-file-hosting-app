@@ -5,14 +5,26 @@ import morgan from 'morgan';
 const app = express();
 import authRoutes from './routes/auth';
 import userRoutes from './routes/user';
+import categoryRoutes from './routes/category';
+import audioRoutes from './routes/audio';
+import path from 'path';
+import { authenticateAssets } from './middleware/auth';
 
 app.use(helmet());
 app.use(cors());
 app.use(morgan('combined'));
 app.use(express.json());
 
+app.use(
+  '/uploads',
+  authenticateAssets,
+  express.static(path.join(__dirname, '../uploads'))
+);
+
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/category', categoryRoutes);
+app.use('/api/audio', audioRoutes);
 
 app.use('*', (req, res) => {
   res.status(404).json({

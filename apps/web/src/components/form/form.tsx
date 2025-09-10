@@ -9,6 +9,7 @@ const Form = <FormValues extends FieldValues>({
   onSubmit,
   defaultValues,
   btnProps = {},
+  dataSource = {},
 }: FormProps<FormValues>) => {
   const {
     handleSubmit,
@@ -22,8 +23,13 @@ const Form = <FormValues extends FieldValues>({
     <form onSubmit={handleSubmit(onSubmit)}>
       <Flex pt="4" direction="column" gap="3" justify="center" align="center">
         {fields.map((item) => {
-          const { type, rules, ...rest } = item;
+          const { type, dataSource: itemData, rules, ...rest } = item;
           const Component = FIELD_MAP[type];
+
+          const customData = itemData?.value
+            ? { [itemData.propsMap]: dataSource[itemData.value] }
+            : {};
+
           return (
             <Controller
               key={item.name}
@@ -34,11 +40,11 @@ const Form = <FormValues extends FieldValues>({
                 const fieldError = errors?.[field.name];
                 return (
                   <Box width="100%">
-                    <Text size="2">
+                    <Text as="div" size="2">
                       {item.label} {item.label && rules?.required ? '*' : ''}
                     </Text>
                     {/* @ts-ignore */}
-                    <Component {...rest} {...field} />
+                    <Component {...rest} {...field} {...customData} />
                     {fieldError && (
                       <Box as="div" width="100%">
                         <Text size="1" color="red">

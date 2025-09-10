@@ -6,8 +6,10 @@ export type ApiOptions<Payload> = {
   requireToken?: boolean;
 };
 
+export const API_GATEWAY = import.meta.env.VITE_API_GATEWAY;
+
 const api = axios.create({
-  baseURL: `${import.meta.env.VITE_API_GATEWAY}`,
+  baseURL: `${API_GATEWAY}`,
 });
 
 export const makeApiRequest = async <T>(
@@ -16,8 +18,8 @@ export const makeApiRequest = async <T>(
   {
     data = null,
     headers = {} as AxiosRequestHeaders,
-    requireToken = false,
-  }: ApiOptions<T>
+    requireToken = true,
+  }: ApiOptions<T> = {}
 ) => {
   try {
     const response = await api({
@@ -33,6 +35,7 @@ export const makeApiRequest = async <T>(
         }),
       },
     });
+
     return response.data;
   } catch (error) {
     console.error('API Request Error:', error);

@@ -2,4 +2,5 @@ export const FIELD = {
   TEXT_INPUT: 'TEXT_INPUT',
   SECURE_TEXT_INPUT: 'SECURE_TEXT_INPUT',
   SELECT: 'SELECT',
+  UPLOAD: 'UPLOAD',
 } as const;

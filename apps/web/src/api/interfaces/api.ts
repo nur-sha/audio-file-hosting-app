@@ -10,3 +10,9 @@ export interface PaginationResponse {
   limit: number;
   totalPages: number;
 }
+
+export interface ApiCommonResponse {
+  createdAt: string;
+  deletedAt: string;
+  updatedAt: string;
+}

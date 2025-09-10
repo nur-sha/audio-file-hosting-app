@@ -16,23 +16,18 @@ export type DeleteUserPayload = {
 export const registerUser = (data: RegisterUserPayload) => {
   return makeApiRequest<RegisterUserPayload>(API_ROUTES.register, 'POST', {
     data,
+    requireToken: false,
   });
 };
 
 export const getAllUsers = () => {
-  return makeApiRequest(API_ROUTES.users, 'POST', { requireToken: true });
+  return makeApiRequest(API_ROUTES.users, 'POST');
 };
 
 export const updateUserById = (data: UpdateUserPayload) => {
-  return makeApiRequest(API_ROUTES.user, 'PUT', {
-    data,
-    requireToken: true,
-  });
+  return makeApiRequest(API_ROUTES.user, 'PUT', { data });
 };
 
 export const deleteUserById = (data: DeleteUserPayload) => {
-  return makeApiRequest(API_ROUTES.user, 'DELETE', {
-    data,
-    requireToken: true,
-  });
+  return makeApiRequest(API_ROUTES.user, 'DELETE', { data });
 };

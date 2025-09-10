@@ -8,7 +8,12 @@ function useUser() {
     setUserStorage(data);
   };
 
-  return { user, setUser, isLoggedIn: Boolean(user?.token) };
+  return {
+    user,
+    setUser,
+    isLoggedIn: Boolean(user?.token),
+    isAdmin: user?.user.role === 'ADMIN',
+  };
 }
 
 export default useUser;

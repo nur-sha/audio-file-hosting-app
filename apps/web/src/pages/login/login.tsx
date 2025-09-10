@@ -26,7 +26,6 @@ const Login = () => {
 
   const handleSubmit = (values: LoginFormFieldValues) => {
     if (error) setError('');
-    console.log('handleSubmit');
     mutate(values, {
       onSuccess: handleSuccess,
       onError: handleError,

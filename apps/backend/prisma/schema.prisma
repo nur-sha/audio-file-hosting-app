@@ -15,6 +15,7 @@ model User {
   role         UserRole @default(USER)
   displayName  String
   fullName     String
+  audios       Audio[]
   active       Boolean  @default(true)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
@@ -25,4 +26,41 @@ model User {
 enum UserRole {
   USER
   ADMIN
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  description String?
+  audios      Audio[] 
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime? 
+
+  @@map("categories")
+}
+
+model Audio {
+  id          String    @id @default(cuid())
+  title       String
+  description String?
+  filename    String    // Stored filename (e.g., "audio-123.mp3")
+  originalName String   // Original upload name
+  filePath    String    // Full path to the file
+  mimeType    String
+  size        Int       // File size in bytes
+  duration    Int?      // Will be populated by BullMQ worker (seconds)
+  isProcessing Boolean  @default(true)
+  
+  userId     String
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  categoryId String
+  category   Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  deletedAt  DateTime? 
+
+  @@map("audios")
 }

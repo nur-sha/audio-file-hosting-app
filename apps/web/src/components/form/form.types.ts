@@ -12,6 +12,11 @@ type DynamicString = {
   [key: string]: string;
 };
 
+export type FieldDataSource = {
+  propsMap: string;
+  value: string;
+};
+
 export type FieldConfig<T extends FieldValues> = {
   type: keyof typeof FIELD;
   name: Path<T>;
@@ -20,6 +25,7 @@ export type FieldConfig<T extends FieldValues> = {
   transformValue?: string;
   rules?: any;
   events?: DynamicString;
+  dataSource?: FieldDataSource;
 };
 
 export type FormProps<FormValues extends FieldValues = FieldValues> = {
@@ -28,4 +34,7 @@ export type FormProps<FormValues extends FieldValues = FieldValues> = {
   onSubmit: SubmitHandler<FormValues>;
   defaultValues?: DefaultValues<FormValues>;
   btnProps?: ComponentProps<typeof Button>;
+  dataSource?: {
+    [key: string]: unknown;
+  };
 };

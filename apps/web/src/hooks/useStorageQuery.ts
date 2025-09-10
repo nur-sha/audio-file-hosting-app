@@ -14,7 +14,6 @@ const useSessionStorage = <T>(keyName: string, defaultValue?: T) => {
         return defaultValue;
       }
     } catch (err) {
-      console.log('err', err);
       return defaultValue;
     }
   });
