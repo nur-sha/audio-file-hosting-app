@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router';
 import CreateUser, {
   CreateUserFormValues,
@@ -9,7 +9,9 @@ import { UserModel } from '../../api/interfaces/user.types';
 
 const Register = () => {
   const navigate = useNavigate();
-  const { setUser } = useUser();
+  const { user, setUser, isAdmin } = useUser();
+  const queryClient = useQueryClient();
+
   const { mutate } = useMutation({
     mutationFn: registerUser,
   });
@@ -17,8 +19,16 @@ const Register = () => {
   const handleSubmit = (formValues: CreateUserFormValues) => {
     mutate(formValues, {
       onSuccess: (data: { data: UserModel }) => {
-        setUser(data?.data);
-        navigate('/profile');
+        if (!user || !isAdmin) {
+          setUser(data?.data);
+          navigate('/profile');
+          return;
+        }
+
+        if (isAdmin) {
+          queryClient.invalidateQueries({ queryKey: ['users'] });
+          navigate('/users');
+        }
       },
     });
   };

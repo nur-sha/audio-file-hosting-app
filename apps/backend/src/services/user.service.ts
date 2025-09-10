@@ -36,6 +36,7 @@ export class UserService {
         id: true,
         email: true,
         role: true,
+        displayName: true,
         createdAt: true,
       },
     });
@@ -54,6 +55,7 @@ export class UserService {
         id: true,
         email: true,
         role: true,
+        displayName: true,
         createdAt: true,
         updatedAt: true,
       },
