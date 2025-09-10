@@ -17,6 +17,7 @@ import { Library, Upload } from './pages/library';
 import AdminRoutes from './layouts/admin-routes';
 import { ManageUsers } from './pages/manage-users';
 import { Theme } from '@radix-ui/themes';
+import { Categories } from './pages/library/categories';
 
 const queryClient = new QueryClient();
 
@@ -35,6 +36,7 @@ const router = createBrowserRouter(
 
         <Route element={<AdminRoutes />}>
           <Route path="/users" element={<ManageUsers />} />
+          <Route path="/categories" element={<Categories />} />
         </Route>
       </Route>
     </>

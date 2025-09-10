@@ -7,10 +7,9 @@ export const BASE_USER_MENU = [
 
 export const ADMIN_MENU = [
   ...BASE_USER_MENU,
-
   {
     label: 'Category',
-    to: '/libray/categories',
+    to: '/categories',
   },
   {
     label: 'Manage users',

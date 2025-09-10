@@ -57,11 +57,9 @@ services:
       dockerfile: Dockerfile
     container_name: audiohost-web
     volumes:
-      # Mount source code for hot reload
       - ./apps/frontend:/apps/frontend
       - ./nx.json:/apps/nx.json
       - ./tsconfig.base.json:/apps/tsconfig.base.json
-      # Named volume for node_modules
     restart: unless-stopped
     environment:
       - VITE_API_GATEWAY=http://localhost:3001
